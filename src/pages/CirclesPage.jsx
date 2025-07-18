@@ -1,6 +1,5 @@
 import Navigation from '../components/Navigation';
 import CircleHero from '../components/circles/CircleHero';
-import Footer from '../components/Footer';
 
 import CircleDashboard from '../components/circles/CircleDashboard';
 
@@ -10,7 +9,6 @@ const CirclesPage = () => {
       <Navigation />
       <CircleHero />
       <CircleDashboard />
-      <Footer />
     </div>
   );
 };

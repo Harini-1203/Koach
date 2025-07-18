@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import MetricSection from "./components/MetricSection";
 import KoachJourney from "./components/koachJourney";
@@ -7,7 +6,6 @@ import About from "./pages/About"
 import AboutSection from "./components/AboutSection";
 import JoinSection from "./components/JoinSection";
 import Testimonials from "./components/Testimonials";
-import Footer from "./components/Footer";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -16,6 +14,8 @@ import Welcome from "./pages/onBoardingPages/Welcome"
 import { AuthProvider } from "./utils/AuthContext";
 import PrivateRoute from "./utils/PrivateRoute";
 import NotFound from "./pages/NotFound";
+
+import Layout from "./utils/Layout"
 
 // mentor pages
 import Community1 from "./pages/onBoardingPages/mentorPages/Community1"
@@ -38,33 +38,36 @@ import MenteeCommunity7 from "./pages/onBoardingPages/menteePages/Community7"
 import Community8 from "./pages/onBoardingPages/menteePages/Community8"
 import Community9 from "./pages/onBoardingPages/menteePages/Community9"
 
+//Mentor Profile
+import MentorProfile from "./pages/MentorProfilePage/MentorProfile";
+
 
 function AppContent() {
-  const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/signup", "/forgot-password", "/welcome"];
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  
 
   return (
     <div className="min-h-screen bg-white">
       
       <Routes>
+        
         <Route
           path="/"
           element={
-            <>
-              {!shouldHideNavbar && <Navigation />}
+            <Layout>
+            <div>
               <Hero />
               <MetricSection />
               <KoachJourney />
               <AboutSection />
               <Testimonials />
               <JoinSection />
-              <Footer />
-            </>
+            </div>
+            </Layout>
           }
         />
-        <Route path="/about" element={<About />} />
-        <Route path="/circles" element={<CirclesPage />} />
+        
+        <Route path="/about" element={<Layout><About /></Layout>} />
+        <Route path="/circles" element={<Layout><CirclesPage /></Layout>} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -90,6 +93,7 @@ function AppContent() {
         <Route path="/mentee/community8" element={<PrivateRoute><Community8 /></PrivateRoute>} />
         <Route path="/mentee/community9" element={<PrivateRoute><Community9 /></PrivateRoute>} />
 
+        <Route path="/mentor/profile" element={<MentorProfile />}  />
         {/* wrong route   */}
         <Route path="*" element={<NotFound />} />
       </Routes>
